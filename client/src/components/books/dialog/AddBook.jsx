@@ -11,7 +11,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -33,12 +33,9 @@ const AddBook = ({
 }) => {
   const [values, setValues] = React.useState({
     id: "",
-    BookId: "",
     title: "",
     author: "",
-    username: "",
-    password: "",
-    BookType: "",
+    publishedDate: new Date(),
   });
   const [loading, setLoading] = useState(false);
   React.useEffect(() => {
@@ -75,7 +72,7 @@ const AddBook = ({
         setLoading(true);
         let res = await axios.post(`${REST_API_ENDPOINT}book`, values);
         console.log(res.data);
-        // toast.success("Book Added Successfully");
+        toast.success("Book Added Successfully");
         setLoading(false);
         setRefresh(!refresh);
         setAddBookState(false);
@@ -83,7 +80,7 @@ const AddBook = ({
         console.log(error);
       }
     } else {
-      //   toast.error("Please Fill All Details First");
+      toast.error("Please Fill All Details First");
     }
   };
 
@@ -96,7 +93,7 @@ const AddBook = ({
         values
       );
       console.log(data);
-      //   toast.success("Book Updated");
+      toast.success("Book Updated Successfully");
       setLoading(false);
       setRefresh(!refresh);
 
@@ -111,7 +108,7 @@ const AddBook = ({
     try {
       let data = await axios.delete(`${REST_API_ENDPOINT}book/${values.id}/`);
       console.log(data);
-      //   toast.success("Book Deleted");
+      toast.success("Book Deleted Successfully");
       setLoading(false);
       setRefresh(!refresh);
 
